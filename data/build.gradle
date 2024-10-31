@@ -1,0 +1,72 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-parcelize'
+    id 'dagger.hilt.android.plugin'
+    id 'kotlin-kapt'
+}
+
+apply from: '../dependencies.gradle'
+
+android {
+    compileSdk 34
+    namespace "com.example.mvvmclean.data"
+
+    defaultConfig {
+        minSdk 21
+        targetSdk 34
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = '11'
+    }
+}
+
+dependencies {
+
+    implementation project(path: ':domain')
+    implementation androidx.coreKtx
+    implementation androidx.appCompat
+
+    //Coroutines
+    implementation kotlin.kotlinxCoroutines
+
+    //DI Hilt
+    implementation hilt.hiltAndroid
+    kapt hilt.kaptHiltAndroidCompiler
+
+    //DATA STORE
+//    implementation datastore.dataStoreScore
+    implementation datastore.dataStorePreferences
+
+    //Network
+    implementation network.retrofit
+    implementation network.retrofitGsonConverter
+    implementation network.okhttp
+    implementation network.okhttpLoggingInterceptor
+
+    //Testing
+    testImplementation testing.ioMock
+    testImplementation testing.unitTestingJunit
+    testImplementation testing.truth
+    testImplementation testing.unitTestingCoroutines
+    androidTestImplementation  testing.uiTestingJunit
+    androidTestImplementation testing.uiTestingEspresso
+}

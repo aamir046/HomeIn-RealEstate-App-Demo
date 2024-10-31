@@ -1,0 +1,116 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-parcelize'
+    id 'dagger.hilt.android.plugin'
+    id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs.kotlin'
+}
+
+apply from: '../dependencies.gradle'
+
+android {
+    compileSdk 34
+    namespace "com.example.mvvmclean"
+    defaultConfig {
+        applicationId "com.example.mvvmclean"
+        minSdk 21
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildFeatures {
+        dataBinding = true
+    }
+
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = '11'
+    }
+
+    kapt {
+        correctErrorTypes = true
+    }
+}
+
+dependencies {
+
+    implementation project(path: ':domain')
+    implementation project(path: ':data')
+    implementation androidx.coreKtx
+    implementation androidx.appCompat
+    implementation androidx.constraintlayout
+    implementation androidx.lifecycleExt
+    implementation google.material
+
+    //Activity extension, referring with  "by viewModels"
+    implementation androidx.activityKtx
+
+    //Lottie
+    implementation("com.airbnb.android:lottie:6.0.1")
+
+    //viewpager
+    implementation 'androidx.viewpager2:viewpager2:1.1.0'
+    implementation 'com.tbuonomo:dotsindicator:4.3'
+
+    // LiveData
+    implementation androidx.lifecycleLiveData
+
+    // LiveData
+    implementation glide.glideLib
+
+    // ViewModel
+    implementation androidx.lifecycleViewModel
+
+    // Navigation
+    implementation androidx.navigationFragment
+    implementation androidx.navigationUi
+
+    //DI Hilt
+    implementation hilt.hiltAndroid
+    kapt hilt.kaptHiltAndroidCompiler
+    kapt hilt.kaptHiltCompiler
+
+    //Coroutines
+    implementation kotlin.kotlinxCoroutines
+
+    //Glide
+    implementation others.picasso
+
+    //PlayServices
+    implementation google.playServices
+
+    implementation others.sdp
+    
+    //Testing
+    testImplementation testing.ioMock
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
+    testImplementation testing.unitTestingJunit
+    testImplementation testing.truth
+    testImplementation testing.unitTestingCoroutines
+    androidTestImplementation  testing.uiTestingJunit
+    androidTestImplementation testing.uiTestingEspresso
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}

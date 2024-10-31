@@ -1,0 +1,51 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-parcelize'
+    id 'dagger.hilt.android.plugin'
+    id 'kotlin-kapt'
+}
+
+apply from: '../dependencies.gradle'
+
+android {
+    compileSdk 34
+    namespace "com.example.mvvmclean.domain"
+    defaultConfig {
+        minSdk 21
+        targetSdk 34
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = '11'
+    }
+}
+
+dependencies {
+
+    implementation androidx.coreKtx
+    implementation androidx.appCompat
+
+    //Coroutines
+    implementation kotlin.kotlinxCoroutines
+
+    //DI Hilt
+    implementation 'com.google.dagger:hilt-android:2.48'
+    kapt 'com.google.dagger:hilt-android-compiler:2.48'
+
+    //Gson
+    implementation "com.google.code.gson:gson:2.10.1"
+}
