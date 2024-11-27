@@ -7,7 +7,9 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.mvvmclean.BR
 import com.example.mvvmclean.R
 import com.example.mvvmclean.base.BaseFragment
+import com.example.mvvmclean.base.NavigationCommand
 import com.example.mvvmclean.databinding.FragmentIntroBinding
+import com.example.mvvmclean.ui.splash.SplashFragmentDirections
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -43,7 +45,7 @@ class IntroFragment : BaseFragment<FragmentIntroBinding, IntroVM>() {
     private fun setNavigateToMainScreenObserver() {
         viewModel.navigateToMainScreen.observe(viewLifecycleOwner) {
             if (it) {
-                viewModel.showToast.value = "Change Screen"
+                navigateToHomeScreen()
             }
         }
     }
@@ -54,6 +56,10 @@ class IntroFragment : BaseFragment<FragmentIntroBinding, IntroVM>() {
                 viewPager.currentItem = page
             }
         }
+    }
+
+    private fun navigateToHomeScreen(){
+        navigate(NavigationCommand.To(IntroFragmentDirections.toHomeFragment()))
     }
 
     private fun setViewPagerChangeCallBack() {

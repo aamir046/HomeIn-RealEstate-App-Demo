@@ -8,15 +8,15 @@ import com.example.mvvmclean.databinding.IntroPageItemBinding
 class IntroPagerAdapter(
     private val titles: List<String>,
     private val descriptions: List<String>,
-    private val imageIcons: List<Int>
+    private val gifIcons: List<Int>
 ) : RecyclerView.Adapter<IntroPagerAdapter.IntroViewHolder>() {
 
     inner class IntroViewHolder(private val binding: IntroPageItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(title: String, description: String,imageIcon:Int) {
+        fun bind(title: String, description: String,gifIcon:Int) {
             binding.title = title
             binding.description = description
-            binding.imageIcon = imageIcon
+            binding.gifIcon = gifIcon
         }
     }
 
@@ -27,7 +27,7 @@ class IntroPagerAdapter(
     }
 
     override fun onBindViewHolder(holder: IntroViewHolder, position: Int) {
-        holder.bind(titles[position], descriptions[position],imageIcons[position])
+        holder.bind(titles[position], descriptions[position],gifIcons[position])
     }
 
     override fun getItemCount(): Int = titles.size

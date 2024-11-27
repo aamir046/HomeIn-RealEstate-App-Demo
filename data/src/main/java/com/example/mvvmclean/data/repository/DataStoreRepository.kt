@@ -1,8 +1,6 @@
 package com.example.mvvmclean.data.repository
 
 import android.content.Context
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
@@ -34,13 +32,7 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
             throw exception
         }
     }.map { prefrence ->
-        prefrence[PreferenceKey.isFirstTimeUse] ?: false
+        prefrence[PreferenceKey.isFirstTimeUse] ?: true
     }
-
-//    suspend fun saveIsEnglish(isEnglish: String) {
-//        context.dataStore.edit { preferences ->
-//            preferences[PreferenceKey.isEnglish] = isEnglish
-//        }
-//    }
 
 }

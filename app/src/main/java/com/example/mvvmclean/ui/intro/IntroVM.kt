@@ -4,17 +4,19 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.mvvmclean.R
 import com.example.mvvmclean.base.BaseViewModel
 import com.example.mvvmclean.data.repository.DataStoreRepository
 import com.example.mvvmclean.ui.intro.adapter.IntroPagerAdapter
 import com.example.mvvmclean.utils.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class IntroVM @Inject constructor (
-     dataStoreRepository: DataStoreRepository
+  private val dataStoreRepository: DataStoreRepository
 ) : BaseViewModel(){
 
     val isFirstTimeLogin:Boolean = dataStoreRepository.getIsFirstTimeAppUse.asLiveData().value ?: false
@@ -32,7 +34,7 @@ class IntroVM @Inject constructor (
                 "Navigate the real estate market effortlessly with our user-friendly tools designed to streamline your buying or selling process",
                 "Keep your finger on the pulse of the real estate market with regular updates on pricing, availability, and market shifts",
                 "Whether you're a first-time buyer or a seasoned investor, discover lucrative properties that align with your financial goals"),
-            listOf(R.drawable.ic_intro_1, R.drawable.ic_intro_2, R.drawable.ic_intro_3,R.drawable.ic_intro_4)
+            listOf(R.drawable.intro_item_1_gif, R.drawable.intro_item_2_gif, R.drawable.intro_item_3_gif,R.drawable.intro_item_4_gif)
         )
     }
 
@@ -53,12 +55,19 @@ class IntroVM @Inject constructor (
         if (nextPage < adapter.itemCount) {
             _currentPage.value = nextPage
         } else {
+            updateFirstTimeAppUsed()
            navigateToMainScreen.value = true
         }
     }
 
+    private fun updateFirstTimeAppUsed() {
+        viewModelScope.launch {
+            dataStoreRepository.saveIsFistTimeAppUse(false)
+        }
+    }
+
     fun onSkipClicked() {
-//        _currentPage.value = adapter.itemCount - 1
+        updateFirstTimeAppUsed()
         navigateToMainScreen.value = true
     }
 

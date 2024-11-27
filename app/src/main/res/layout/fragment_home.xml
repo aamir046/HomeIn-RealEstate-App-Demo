@@ -16,10 +16,107 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
+        android:paddingTop="@dimen/_16sdp"
         tools:context=".presentation.main.article.ArticleFragment">
 
+        <RelativeLayout
+            android:id="@+id/rl_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:padding="@dimen/_8sdp">
 
+            <EditText
+                android:id="@+id/et_search"
+                style="@style/etStyleRegular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="villa"
+                android:drawableStart="@drawable/ic_search"
+                android:drawablePadding="@dimen/_8sdp"
+                android:hint="@string/search_property"
+                android:inputType="text"
+                android:paddingEnd="@dimen/_45sdp"
+                android:singleLine="true" />
+
+            <ImageView
+                android:id="@+id/iv_filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:padding="@dimen/_8sdp"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:contentDescription="filter search"
+                android:src="@drawable/ic_filter"
+                tools:ignore="HardcodedText" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_margin="@dimen/_8sdp"
+            android:id="@+id/relativeLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rl_search">
+
+            <TextView
+                android:id="@+id/tv_region"
+                style="@style/tvStyleMediumRegular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dubai"
+                android:textSize="@dimen/_23sdp"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/tv_date"
+                style="@style/tvStyleSmallRegular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_region"
+                android:text="Monday, 4 November 2024"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/tv_temperature"
+                style="@style/tvStyleSmallRegular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:drawablePadding="@dimen/_8sdp"
+                android:text="3"
+                android:textSize="@dimen/_25sdp"
+                app:drawableStartCompat="@drawable/ic_cloud"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/tv_degree"
+                style="@style/tvStyleSmallBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="@dimen/_1sdp"
+                android:text="o"
+                android:textSize="@dimen/_16sdp"
+                tools:ignore="HardcodedText" />
+
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/parentRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout2" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

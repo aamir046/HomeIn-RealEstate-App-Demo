@@ -35,7 +35,11 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, SplashVM>(){
     }
 
     private fun navigateToTargetScreen(){
-        navigate(NavigationCommand.To(SplashFragmentDirections.toIntroFragment()))
+        if(viewModel.isFirstTimeAppUse)
+            navigate(NavigationCommand.To(SplashFragmentDirections.toIntroFragment()))
+        else
+            navigate(NavigationCommand.To(SplashFragmentDirections.toHomeFragment()))
+
     }
 
 }

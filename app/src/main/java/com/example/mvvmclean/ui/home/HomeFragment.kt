@@ -3,10 +3,12 @@ package com.example.mvvmclean.ui.home
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mvvmclean.BR
 import com.example.mvvmclean.R
 import com.example.mvvmclean.base.BaseFragment
 import com.example.mvvmclean.databinding.FragmentHomeBinding
+import com.example.mvvmclean.ui.home.adapters.ParentAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -27,6 +29,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeVM>(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.sections.observe(viewLifecycleOwner) { sections ->
+            val parentAdapter = ParentAdapter(sections)
+            getViewDataBinding().parentRecyclerView.adapter = parentAdapter
+        }
     }
 
 }

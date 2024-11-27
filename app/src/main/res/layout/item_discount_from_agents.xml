@@ -1,0 +1,106 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable name="agent" type="com.example.mvvmclean.ui.home.DiscountedAgent" />
+    </data>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardElevation="4dp"
+            android:layout_margin="@dimen/_4sdp"
+            app:cardCornerRadius="@dimen/_10sdp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/iv_card_gradient_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:setGradientBackground="@{true}"/>
+
+<!--                <View-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:background="#40000000"/>-->
+
+                <ImageView
+                    android:id="@+id/iv_agent_logo"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@color/white"
+                    app:imageDrawable="@{agent.logoUrl}"
+                    app:layout_constraintBottom_toTopOf="@+id/tv_agent"
+                    app:layout_constraintEnd_toEndOf="@+id/tv_agent"
+                    app:layout_constraintStart_toStartOf="@+id/tv_agent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_discount_desc"
+                    tools:src="@drawable/ic_logo_danube" />
+
+                <TextView
+                    android:id="@+id/tv_discount_title"
+                    style="@style/tvStyleMediumBold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:text="@{agent.discountTitle}"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_15sdp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:layout_editor_absoluteX="8dp"
+                    tools:text="Discount Offers from Agents" />
+
+                <TextView
+                    android:id="@+id/tv_discount_desc"
+                    style="@style/tvStyleSmallRegular"
+                    android:textSize="@dimen/_12sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                   android:layout_margin="@dimen/_10sdp"
+                    android:text="@{agent.discountDescription}"
+                    tools:text="Discount Offers from Agents"
+                    android:textColor="@color/white"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_discount_title" />
+
+                <TextView
+                    android:id="@+id/tv_agent"
+                    style="@style/tvStyleSmallRegular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@{agent.agentName}"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/tv_discount_desc"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_agent_logo"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:text="Danube properties" />
+
+                <TextView
+                    android:id="@+id/tv_discount_date"
+                    style="@style/tvStyleSmallRegular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@{agent.discountDate}"
+                    tools:text="Starting 01-12-2025"
+                    android:drawableStart="@drawable/ic_calender"
+                    android:drawablePadding="@dimen/_2sdp"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_11sdp"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_agent_logo"
+                    app:layout_constraintStart_toStartOf="@+id/tv_discount_desc"
+                    app:layout_constraintTop_toTopOf="@+id/iv_agent_logo" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+</layout>
